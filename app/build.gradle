@@ -1,16 +1,18 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 'android-P'
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.ausichenko.cashflow"
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -18,14 +20,52 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "com.google.android.material:material:1.0.0-alpha3"
+    implementation "com.google.android.material:material:1.0.0-beta01"
+    implementation "com.android.support:appcompat-v7:27.1.0"
+
+    def lifecycle_version = "1.1.1"
+
+    // ViewModel and LiveData
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    //kapt "android.arch.lifecycle:compiler:$lifecycle_version"
+    // alternately - if using Java8, use the following instead of compiler
+    implementation "android.arch.lifecycle:common-java8:$lifecycle_version"
+    // optional - ReactiveStreams support for LiveData
+    //implementation "android.arch.lifecycle:reactivestreams:$lifecycle_version"
+
+    def room_version = "1.1.1"
+
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
+    // optional - RxJava support for Room
+    //implementation "android.arch.persistence.room:rxjava2:$room_version"
+
+    def paging_version = "1.0.1"
+
+    implementation "android.arch.paging:runtime:$paging_version"
+    // optional - RxJava support
+    //implementation "android.arch.paging:rxjava2:1.0.1"
+
+    // TODO: replace with dagger2
+    def koin_version = '0.9.3'
+
+    //implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-android-architecture:$koin_version"
 
     testImplementation 'junit:junit:4.12'
+    testImplementation "android.arch.core:core-testing:$lifecycle_version"
+    testImplementation "android.arch.paging:common:$paging_version"
+    testImplementation "android.arch.persistence.room:testing:$room_version"
+    testImplementation "org.koin:koin-test:$koin_version"
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
