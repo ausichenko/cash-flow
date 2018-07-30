@@ -5,9 +5,11 @@ import com.ausichenko.cashflow.data.repository.CashRepositoryImpl
 import com.ausichenko.cashflow.view.NavigationViewModel
 import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.Module
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 
-val cashModule : Module = applicationContext {
+val cashModule : Module = module {
     viewModel { NavigationViewModel(get()) }
     single { CashRepositoryImpl() as CashRepository }
 }
+
+// todo: add room module

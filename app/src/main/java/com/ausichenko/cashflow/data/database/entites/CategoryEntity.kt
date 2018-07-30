@@ -6,7 +6,11 @@ import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "categories",
-        foreignKeys = [(ForeignKey(entity = FlowEntity::class, parentColumns = arrayOf("id"), childColumns = arrayOf("category_id"), onDelete = CASCADE))])
+        foreignKeys = [(ForeignKey(
+                entity = FlowEntity::class,
+                parentColumns = arrayOf("category_id"),
+                childColumns = arrayOf("id"),
+                onDelete = CASCADE))])
 data class CategoryEntity(
         @PrimaryKey val id: Int,
         val name: String

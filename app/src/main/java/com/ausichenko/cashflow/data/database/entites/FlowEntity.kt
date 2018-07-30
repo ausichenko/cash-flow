@@ -8,7 +8,8 @@ import androidx.room.PrimaryKey
 data class FlowEntity(
         @PrimaryKey val int: Int,
         val date: Int,
-        @ColumnInfo(name = "category_id") val categoryId: Int,
+        @ColumnInfo(name = "category_id")
+        val categoryId: Int,
         val name: String,
         val description: String,
         val price: Double
