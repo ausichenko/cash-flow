@@ -13,12 +13,18 @@ class NavigationActivity : AppCompatActivity() {
 
     val navigationViewModel : NavigationViewModel by viewModel()
 
+    private val bottomMenu = BottomNavigationFragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
 
         val bar = findViewById<BottomAppBar>(R.id.bar)
-        setSupportActionBar(bar)
+        bar.setNavigationIcon(R.drawable.ic_menu)
+        bar.setNavigationOnClickListener {
+            bottomMenu.show(supportFragmentManager, bottomMenu.tag)
+        }
+        //setSupportActionBar(bar)
 
         navigationViewModel.categories.observe(this, Observer {
             for (categoryEntity in it) {
@@ -29,7 +35,7 @@ class NavigationActivity : AppCompatActivity() {
         navigationViewModel.getCategories()
 
         fab.setOnClickListener {
-            navigationViewModel.addNewCat()
+            //navigationViewModel.addNewCat()
         }
     }
 }
