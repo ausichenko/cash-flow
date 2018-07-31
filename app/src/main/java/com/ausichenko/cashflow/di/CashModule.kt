@@ -1,5 +1,7 @@
 package com.ausichenko.cashflow.di
 
+import androidx.room.Room
+import com.ausichenko.cashflow.data.database.CashDatabase
 import com.ausichenko.cashflow.data.repository.CashRepository
 import com.ausichenko.cashflow.data.repository.CashRepositoryImpl
 import com.ausichenko.cashflow.view.NavigationViewModel
@@ -12,4 +14,10 @@ val cashModule : Module = module {
     single { CashRepositoryImpl() as CashRepository }
 }
 
-// todo: add room module
+val roomModule : Module = module {
+    single {
+        Room.databaseBuilder(get(), CashDatabase::class.java, CashDatabase.databaseName).build()
+    }
+}
+
+val cashApp = listOf(cashModule, roomModule)

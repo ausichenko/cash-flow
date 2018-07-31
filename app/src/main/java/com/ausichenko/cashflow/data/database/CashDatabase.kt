@@ -10,6 +10,11 @@ import com.ausichenko.cashflow.data.database.entites.FlowEntity
 @Database(entities = [(CategoryEntity::class), (FlowEntity::class)], version = 1)
 abstract class CashDatabase : RoomDatabase() {
 
+    companion object {
+        const val databaseName = "cash_database"
+    }
+
+
     abstract fun categoryDao(): CategoryDao
     abstract fun flowDao(): FlowDao
 }

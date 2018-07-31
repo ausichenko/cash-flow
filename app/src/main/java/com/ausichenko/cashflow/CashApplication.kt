@@ -1,7 +1,7 @@
 package com.ausichenko.cashflow
 
 import android.app.Application
-import com.ausichenko.cashflow.di.cashModule
+import com.ausichenko.cashflow.di.cashApp
 import org.koin.android.ext.android.startKoin
 
 class CashApplication : Application() {
@@ -9,6 +9,6 @@ class CashApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        startKoin(this, listOf(cashModule))
+        startKoin(this, cashApp)
     }
 }
