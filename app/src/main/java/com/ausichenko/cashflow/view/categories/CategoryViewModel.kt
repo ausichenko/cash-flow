@@ -1,4 +1,4 @@
-package com.ausichenko.cashflow.view
+package com.ausichenko.cashflow.view.categories
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -9,12 +9,12 @@ import com.ausichenko.cashflow.data.repository.CashRepository
 import com.ausichenko.cashflow.utils.AppExecutors
 import kotlinx.coroutines.experimental.launch
 
-class NavigationViewModel(
+class CategoryViewModel(
         private val appExecutors: AppExecutors,
-        private val cashRepository: CashRepository) : ViewModel() {
+        private val cashRepository: CashRepository
+) : ViewModel() {
 
     val categories = MutableLiveData<List<CategoryEntity>>()
-    fun sayHello() = cashRepository.giveHello()
 
     fun getCategories() = launch(appExecutors.uiContext) {
         val result = cashRepository.getAllCategories()

@@ -2,7 +2,6 @@ package com.ausichenko.cashflow
 
 import com.ausichenko.cashflow.data.repository.CashRepository
 import com.ausichenko.cashflow.di.cashModule
-import com.ausichenko.cashflow.view.NavigationViewModel
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
