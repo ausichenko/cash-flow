@@ -1,15 +1,14 @@
 package com.ausichenko.cashflow.view.categories
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ausichenko.cashflow.R
+import com.ausichenko.cashflow.view.BottomNavigationDrawer
 import com.ausichenko.cashflow.view.NavigationFragment
 import kotlinx.android.synthetic.main.fragment_categories.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -50,7 +49,8 @@ class CategoryFragment : NavigationFragment() {
     }
 
     override fun onFabClick() {
-        Toast.makeText(context, "Add Category", Toast.LENGTH_LONG).show()
+        val addCategoryFragment = AddCategoryFragment()
+        addCategoryFragment.show(childFragmentManager, addCategoryFragment.tag)
         //navigationViewModel.addNewCat()
     }
 }
