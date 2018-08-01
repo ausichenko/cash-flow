@@ -12,7 +12,7 @@ import org.koin.dsl.module.module
 
 val cashModule : Module = module {
     viewModel { CategoryViewModel(get(), get()) }
-    single { CashRepositoryImpl(get(), get()) as CashRepository }
+    single { CashRepositoryImpl(get(), get(), get()) as CashRepository }
     single { AppExecutors() }
 }
 

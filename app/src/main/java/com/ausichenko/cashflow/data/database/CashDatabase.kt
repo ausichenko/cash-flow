@@ -14,7 +14,6 @@ abstract class CashDatabase : RoomDatabase() {
         const val databaseName = "cash_database"
     }
 
-
     abstract fun categoryDao(): CategoryDao
     abstract fun flowDao(): FlowDao
 }
