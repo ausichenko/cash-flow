@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.ausichenko.cashflow.R
+import com.ausichenko.cashflow.utils.getCurrentFragment
 import com.ausichenko.cashflow.utils.replaceFragmentInActivity
 import com.ausichenko.cashflow.view.categories.CategoryFragment
 import com.ausichenko.cashflow.view.flow.FlowFragment
@@ -21,6 +22,7 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
         initBottomAppBar()
         navigationDrawer.setOnItemClickListener(this)
+        replaceFragmentInActivity(CategoryFragment.newInstance(), container.id)
     }
 
     private fun initBottomAppBar() {
@@ -31,21 +33,22 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         }
 
         fab.setOnClickListener {
-            // todo: send event or callback to fragments (fab clicked - do something)
+            val currentFragment = getCurrentFragment()
+            (currentFragment as? NavigationFragment)?.onFabClick()
         }
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
-        when (menuItem.itemId) {
+        return when (menuItem.itemId) {
             R.id.navigation_categories -> {
                 replaceFragmentInActivity(CategoryFragment.newInstance(), container.id)
-                return true
+                true
             }
             R.id.navigation_flow -> {
                 replaceFragmentInActivity(FlowFragment.newInstance(), container.id)
-                return true
+                true
             }
+            else -> false
         }
-        return false
     }
 }

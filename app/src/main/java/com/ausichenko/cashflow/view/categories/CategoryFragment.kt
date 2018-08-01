@@ -1,16 +1,20 @@
 package com.ausichenko.cashflow.view.categories
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ausichenko.cashflow.R
+import com.ausichenko.cashflow.view.NavigationFragment
+import kotlinx.android.synthetic.main.fragment_categories.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CategoryFragment : Fragment() {
-
-    val categoryViewModel: CategoryViewModel by viewModel()
+class CategoryFragment : NavigationFragment() {
 
     companion object{
         fun newInstance(): CategoryFragment{
@@ -18,38 +22,35 @@ class CategoryFragment : Fragment() {
         }
     }
 
+    val categoryViewModel: CategoryViewModel by viewModel()
+    private val categoryAdapter = CategoryAdapter()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_categories, container, false)
 
+        initCategoriesView(view)
 
         return view
     }
 
-    /*
-        bottomMenu.navigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.navigation_categories -> {
-                    replaceFragmentInActivity(CategoryFragment.newInstance(), container.id)
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.navigation_flow -> {
-                    replaceFragmentInActivity(FlowFragment.newInstance(), container.id)
-                    return@OnNavigationItemSelectedListener true
-                }
-            }
-            false
-        }
-        */
-    /*
-    navigationViewModel.categories.observe(this, Observer {
-        for (categoryEntity in it) {
-            Log.d("CATT", categoryEntity.name)
-        }
-        Log.d("CATT", "end")
-    })
-    navigationViewModel.getCategories()
+    private fun initCategoriesView(view: View) {
+        view.recyclerView.layoutManager = LinearLayoutManager(context)
+        view.recyclerView.adapter = categoryAdapter
+    }
 
-    //fab
-    //navigationViewModel.addNewCat()
-    */
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        categoryViewModel.categories.observe(this, Observer {
+            categoryAdapter.categories = it
+            categoryAdapter.notifyDataSetChanged()
+        })
+
+        categoryViewModel.getCategories()
+    }
+
+    override fun onFabClick() {
+        Toast.makeText(context, "Add Category", Toast.LENGTH_LONG).show()
+        //navigationViewModel.addNewCat()
+    }
 }

@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.Toast
 import com.ausichenko.cashflow.R
+import com.ausichenko.cashflow.view.NavigationFragment
 
-class FlowFragment : Fragment() {
+class FlowFragment : NavigationFragment() {
 
     companion object{
         fun newInstance(): FlowFragment{
@@ -17,5 +18,9 @@ class FlowFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_flow, container, false)
+    }
+
+    override fun onFabClick() {
+        Toast.makeText(context, "Add Flow", Toast.LENGTH_LONG).show()
     }
 }

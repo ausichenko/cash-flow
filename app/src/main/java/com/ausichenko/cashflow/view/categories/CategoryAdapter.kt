@@ -13,10 +13,10 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
     private val headerViewType = 1
     private val itemViewType = 2
 
-    val categories: List<CategoryEntity> = ArrayList()
+    var categories: List<CategoryEntity> = ArrayList()
 
     override fun getItemViewType(position: Int): Int {
-        return if (position == 0) headerViewType else itemViewType
+        return itemViewType// if (position == 0) headerViewType else itemViewType
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,7 +39,7 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (holder is ItemViewHolder) {
-            val category = categories.get(position)
+            val category = categories[position]
             holder.bind(category)
         }
     }

@@ -32,3 +32,7 @@ fun AppCompatActivity.addFragmentToActivity(fragment: Fragment, tag: String) {
         add(fragment, tag)
     }
 }
+
+fun AppCompatActivity.getCurrentFragment(): Fragment {
+    return supportFragmentManager.fragments.last()
+}
