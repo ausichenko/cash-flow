@@ -14,8 +14,6 @@ class CashRepositoryImpl(
         private val categoryDao: CategoryDao,
         private val flowDao: FlowDao) : CashRepository {
 
-    override fun giveHello() = "Hello Koin"
-
     override suspend fun getAllCategories(): Result<List<CategoryEntity>> = withContext(appExecutors.ioContext) {
         val categories = categoryDao.getAll()
         if (categories.isNotEmpty()) {

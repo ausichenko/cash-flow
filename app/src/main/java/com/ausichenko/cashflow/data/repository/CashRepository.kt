@@ -5,7 +5,6 @@ import com.ausichenko.cashflow.data.database.entites.FlowEntity
 import com.ausichenko.cashflow.data.models.Result
 
 interface CashRepository {
-    fun giveHello(): String
 
     suspend fun getAllCategories(): Result<List<CategoryEntity>>
     suspend fun saveCategory(categoryEntity: CategoryEntity)

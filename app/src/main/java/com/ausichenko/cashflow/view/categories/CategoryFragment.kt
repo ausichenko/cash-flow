@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ausichenko.cashflow.R
-import com.ausichenko.cashflow.view.BottomNavigationDrawer
 import com.ausichenko.cashflow.view.NavigationFragment
+import com.ausichenko.cashflow.view.categories.AddCategoryFragment.OnSaveCategoryListener
 import kotlinx.android.synthetic.main.fragment_categories.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -21,6 +20,8 @@ class CategoryFragment : NavigationFragment() {
         }
     }
 
+    val addCategoryFragment = AddCategoryFragment()
+
     val categoryViewModel: CategoryViewModel by viewModel()
     private val categoryAdapter = CategoryAdapter()
 
@@ -28,6 +29,7 @@ class CategoryFragment : NavigationFragment() {
         val view = inflater.inflate(R.layout.fragment_categories, container, false)
 
         initCategoriesView(view)
+        initAddCategory()
 
         return view
     }
@@ -35,6 +37,15 @@ class CategoryFragment : NavigationFragment() {
     private fun initCategoriesView(view: View) {
         view.recyclerView.layoutManager = LinearLayoutManager(context)
         view.recyclerView.adapter = categoryAdapter
+    }
+
+    private fun initAddCategory() {
+        addCategoryFragment.saveCategoryListener = object : OnSaveCategoryListener {
+            override fun onSaveCategory(name: String) {
+                categoryViewModel.saveCategory(name)
+                categoryViewModel.getCategories()
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,8 +60,6 @@ class CategoryFragment : NavigationFragment() {
     }
 
     override fun onFabClick() {
-        val addCategoryFragment = AddCategoryFragment()
         addCategoryFragment.show(childFragmentManager, addCategoryFragment.tag)
-        //navigationViewModel.addNewCat()
     }
 }
