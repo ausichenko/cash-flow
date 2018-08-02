@@ -52,7 +52,6 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
         fun bind(categoryEntity: CategoryEntity) {
             itemView.name.text = categoryEntity.name
-            itemView.description.text = "ID: ${categoryEntity.id}"
         }
     }
 }
