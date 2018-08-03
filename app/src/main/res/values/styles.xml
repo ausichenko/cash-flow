@@ -7,8 +7,9 @@
         <item name="android:navigationBarColor">@color/primary_dark</item>
     </style>
 
-    <style name="AppTheme.BottomSheet" parent="Theme.MaterialComponents.BottomSheetDialog">
+    <style name="AppTheme.BottomSheet" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="android:navigationBarColor">@color/primary_dark</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
 </resources>

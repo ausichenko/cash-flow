@@ -12,29 +12,34 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
     private val headerViewType = 1
     private val itemViewType = 2
+    private val footerViewType = 3
 
     var categories: List<CategoryEntity> = ArrayList()
 
     override fun getItemViewType(position: Int): Int {
-        return itemViewType// if (position == 0) headerViewType else itemViewType
+        return if (position == categories.size) footerViewType else itemViewType
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        when (viewType) {
+        return when (viewType) {
             headerViewType -> {
                 val view = LayoutInflater.from(parent.context).inflate(R.layout.item_category_header, parent, false)
-                return HeaderViewHolder(view)
+                HeaderViewHolder(view)
             }
             itemViewType -> {
                 val view = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
-                return ItemViewHolder(view)
+                ItemViewHolder(view)
+            }
+            footerViewType -> {
+                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_category_footer, parent, false)
+                FooterViewHolder(view)
             }
             else -> throw IllegalArgumentException("no such viewType")
         }
     }
 
     override fun getItemCount(): Int {
-        return categories.size
+        return categories.size + 1
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -54,4 +59,6 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
             itemView.name.text = categoryEntity.name
         }
     }
+
+    class FooterViewHolder(itemView: View) : ViewHolder(itemView)
 }

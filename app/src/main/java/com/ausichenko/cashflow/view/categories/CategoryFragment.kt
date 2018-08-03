@@ -20,7 +20,7 @@ class CategoryFragment : NavigationFragment() {
         }
     }
 
-    val addCategoryFragment = AddCategoryFragment()
+    private val addCategoryFragment = AddCategoryFragment()
 
     val categoryViewModel: CategoryViewModel by viewModel()
     private val categoryAdapter = CategoryAdapter()
@@ -36,6 +36,7 @@ class CategoryFragment : NavigationFragment() {
 
     private fun initCategoriesView(view: View) {
         view.recyclerView.layoutManager = LinearLayoutManager(context)
+        //view.recyclerView.addItemDecoration(DividerItemDecoration(context!!, R.drawable.divider))
         view.recyclerView.adapter = categoryAdapter
     }
 
