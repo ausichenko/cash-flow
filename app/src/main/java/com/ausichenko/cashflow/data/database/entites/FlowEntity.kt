@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import java.util.*
 
 @Entity(tableName = "flow",
         foreignKeys = [(ForeignKey(
@@ -14,12 +15,12 @@ import androidx.room.PrimaryKey
 data class FlowEntity(
         @PrimaryKey(autoGenerate = true)
         var id: Long?,
-        var date: Int,
+        var date: Date,
         @ColumnInfo(name = "category_id")
         var categoryId: Long?,
         var name: String,
         var description: String,
         var price: Double
 ) {
-        constructor():this(null, 0, null, "", "", 0.0)
+        constructor():this(null, Date(), null, "", "", 0.0)
 }
