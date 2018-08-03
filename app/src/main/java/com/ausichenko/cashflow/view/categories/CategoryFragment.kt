@@ -29,18 +29,17 @@ class CategoryFragment : NavigationFragment() {
         val view = inflater.inflate(R.layout.fragment_categories, container, false)
 
         initCategoriesView(view)
-        initAddCategory()
+        initAddCategoryFragment()
 
         return view
     }
 
     private fun initCategoriesView(view: View) {
         view.recyclerView.layoutManager = LinearLayoutManager(context)
-        //view.recyclerView.addItemDecoration(DividerItemDecoration(context!!, R.drawable.divider))
         view.recyclerView.adapter = categoryAdapter
     }
 
-    private fun initAddCategory() {
+    private fun initAddCategoryFragment() {
         addCategoryFragment.saveCategoryListener = object : OnSaveCategoryListener {
             override fun onSaveCategory(name: String) {
                 categoryViewModel.saveCategory(name)

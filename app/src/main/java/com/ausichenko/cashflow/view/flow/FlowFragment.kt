@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +20,8 @@ class FlowFragment : NavigationFragment() {
         }
     }
 
+    private val addFlowFragment = AddFlowFragment()
+
     val flowViewModel: FlowViewModel by viewModel()
     private val flowAdapter = FlowAdapter()
 
@@ -28,6 +29,7 @@ class FlowFragment : NavigationFragment() {
         val view = inflater.inflate(R.layout.fragment_flow, container, false)
 
         initFlowsView(view)
+        initAddFlowDialog()
 
         return view
     }
@@ -38,6 +40,10 @@ class FlowFragment : NavigationFragment() {
         view.recyclerView.adapter = flowAdapter
     }
 
+    private fun initAddFlowDialog() {
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -46,11 +52,11 @@ class FlowFragment : NavigationFragment() {
             flowAdapter.notifyDataSetChanged()
         })
 
-        flowViewModel.getFlow()
+        flowViewModel.getData()
     }
 
     override fun onFabClick() {
-        flowViewModel.saveFlowTest()
-        Toast.makeText(context, "Add Flow", Toast.LENGTH_LONG).show()
+        addFlowFragment.categoriesList = flowViewModel.categories.value!!
+        addFlowFragment.show(childFragmentManager, addFlowFragment.tag)
     }
 }
