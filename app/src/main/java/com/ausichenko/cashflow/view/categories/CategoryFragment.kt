@@ -41,9 +41,8 @@ class CategoryFragment : NavigationFragment() {
     }
 
     private fun initAddCategoryFragment() {
-        addCategoryFragment.saveCategoryListener = object : OnSaveCategoryListener {
-            override fun onSaveCategory(name: String) {
-                viewModel.saveCategory(name)
+        addCategoryFragment.saveListener = object : OnSaveCategoryListener {
+            override fun onSave() {
                 viewModel.getCategories()
             }
         }

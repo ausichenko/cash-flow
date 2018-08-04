@@ -9,10 +9,13 @@ import androidx.fragment.app.DialogFragment
 import com.ausichenko.cashflow.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_add_category.view.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddCategoryFragment : BottomSheetDialogFragment() {
 
-    lateinit var saveCategoryListener: OnSaveCategoryListener
+    lateinit var saveListener: OnSaveCategoryListener
+
+    val viewModel: AddCategoryViewModel by viewModel()
 
     init {
         setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme_BottomSheet)
@@ -27,9 +30,10 @@ class AddCategoryFragment : BottomSheetDialogFragment() {
                 return@setOnClickListener
             }
 
-            saveCategoryListener.onSaveCategory(name)
+            viewModel.saveCategory(name)
 
             view.name_edit_text.setText("")
+            saveListener.onSave()
             dismiss()
         }
 
@@ -37,6 +41,6 @@ class AddCategoryFragment : BottomSheetDialogFragment() {
     }
 
     interface OnSaveCategoryListener {
-        fun onSaveCategory(name: String)
+        fun onSave()
     }
 }

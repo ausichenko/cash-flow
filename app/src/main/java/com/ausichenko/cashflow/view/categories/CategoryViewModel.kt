@@ -26,9 +26,4 @@ class CategoryViewModel(
             Log.d("NavViewModel", "error")
         }
     }
-
-    fun saveCategory(name: String) = launch(appExecutors.uiContext) {
-        val categoryEntity = CategoryEntity(null, name)
-        cashRepository.saveCategory(categoryEntity)
-    }
 }
