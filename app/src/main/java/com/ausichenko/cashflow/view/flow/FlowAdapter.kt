@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ausichenko.cashflow.R
 import com.ausichenko.cashflow.data.database.entites.FlowEntity
-import kotlinx.android.synthetic.main.item_category.view.*
+import kotlinx.android.synthetic.main.item_flow.view.*
 
 class FlowAdapter : RecyclerView.Adapter<FlowAdapter.ViewHolder>() {
 
@@ -57,6 +57,8 @@ class FlowAdapter : RecyclerView.Adapter<FlowAdapter.ViewHolder>() {
 
         fun bind(flowEntity: FlowEntity) {
             itemView.name.text = flowEntity.name
+            itemView.description.text = flowEntity.description
+            itemView.price.text = flowEntity.price.toString()
         }
     }
 

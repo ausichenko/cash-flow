@@ -9,6 +9,9 @@ interface CategoryDao {
     @Query("select * from categories")
     fun getAll(): List<CategoryEntity>
 
+    @Query("select * from categories where id == :id limit 1")
+    fun get(id: Long): CategoryEntity
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(categoryEntity: CategoryEntity)
 

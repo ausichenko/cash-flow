@@ -1,9 +1,6 @@
 package com.ausichenko.cashflow.data.database.entites
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 import java.util.*
 
 @Entity(tableName = "flow",
