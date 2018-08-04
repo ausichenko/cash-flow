@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ausichenko.cashflow.R
 import com.ausichenko.cashflow.view.NavigationFragment
+import com.ausichenko.cashflow.view.flow.add.AddFlowFragment
 import kotlinx.android.synthetic.main.fragment_categories.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -56,7 +57,6 @@ class FlowFragment : NavigationFragment() {
     }
 
     override fun onFabClick() {
-        addFlowFragment.categoriesList = flowViewModel.categories.value!!
         addFlowFragment.show(childFragmentManager, addFlowFragment.tag)
     }
 }

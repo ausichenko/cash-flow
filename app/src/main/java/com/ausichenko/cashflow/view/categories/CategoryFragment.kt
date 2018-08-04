@@ -8,7 +8,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ausichenko.cashflow.R
 import com.ausichenko.cashflow.view.NavigationFragment
-import com.ausichenko.cashflow.view.categories.AddCategoryFragment.OnSaveCategoryListener
+import com.ausichenko.cashflow.view.categories.add.AddCategoryFragment
+import com.ausichenko.cashflow.view.categories.add.AddCategoryFragment.OnSaveCategoryListener
 import kotlinx.android.synthetic.main.fragment_categories.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,10 +21,10 @@ class CategoryFragment : NavigationFragment() {
         }
     }
 
-    private val addCategoryFragment = AddCategoryFragment()
-
-    val categoryViewModel: CategoryViewModel by viewModel()
+    val viewModel: CategoryViewModel by viewModel()
     private val categoryAdapter = CategoryAdapter()
+
+    private val addCategoryFragment = AddCategoryFragment()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_categories, container, false)
@@ -42,8 +43,8 @@ class CategoryFragment : NavigationFragment() {
     private fun initAddCategoryFragment() {
         addCategoryFragment.saveCategoryListener = object : OnSaveCategoryListener {
             override fun onSaveCategory(name: String) {
-                categoryViewModel.saveCategory(name)
-                categoryViewModel.getCategories()
+                viewModel.saveCategory(name)
+                viewModel.getCategories()
             }
         }
     }
@@ -51,12 +52,12 @@ class CategoryFragment : NavigationFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        categoryViewModel.categories.observe(this, Observer {
+        viewModel.categories.observe(this, Observer {
             categoryAdapter.categories = it
             categoryAdapter.notifyDataSetChanged()
         })
 
-        categoryViewModel.getCategories()
+        viewModel.getCategories()
     }
 
     override fun onFabClick() {

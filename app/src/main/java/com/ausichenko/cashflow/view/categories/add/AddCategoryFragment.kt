@@ -1,4 +1,4 @@
-package com.ausichenko.cashflow.view.categories
+package com.ausichenko.cashflow.view.categories.add
 
 import android.os.Bundle
 import android.text.TextUtils

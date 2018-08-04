@@ -1,25 +1,24 @@
-package com.ausichenko.cashflow.view.flow
+package com.ausichenko.cashflow.view.flow.add
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Spinner
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Observer
 import com.ausichenko.cashflow.R
 import com.ausichenko.cashflow.data.database.entites.CategoryEntity
-import com.ausichenko.cashflow.view.categories.AddCategoryFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_add_category.view.*
 import kotlinx.android.synthetic.main.fragment_flow_add.view.*
-import android.widget.ArrayAdapter
-
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class AddFlowFragment : BottomSheetDialogFragment() {
 
-    lateinit var categoriesList: List<CategoryEntity>
-    lateinit var saveCategoryListener: OnSaveFlowListener
+    val viewModel: AddFlowViewModel by viewModel()
+
+    private lateinit var categoriesSpinner: Spinner
 
     init {
         setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme_BottomSheet)
@@ -28,16 +27,7 @@ class AddFlowFragment : BottomSheetDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_flow_add, container, false)
 
-
-        val list = ArrayList<String>()
-        list.add("Not selected")
-        categoriesList.forEach { list.add(it.name) }
-
-        val dataAdapter = ArrayAdapter<String>(context,
-                android.R.layout.simple_spinner_item, list)
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        view.categoriesSpinner.adapter = dataAdapter
-
+        categoriesSpinner = view.categoriesSpinner
         /*
         view.save_button.setOnClickListener {
             val name = view.name_edit_text.text.toString()
@@ -55,7 +45,19 @@ class AddFlowFragment : BottomSheetDialogFragment() {
         return view
     }
 
-    interface OnSaveFlowListener {
-        fun onSaveCategory(name: String)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.categories.observe(this, Observer {
+            initCategoriesSpinner(it)
+        })
+
+        viewModel.getCategories()
+    }
+
+    private fun initCategoriesSpinner(categories: List<CategoryEntity>) {
+        val categoriesDropDownAdapter = CategoriesDropDownAdapter(context!!,
+                android.R.layout.simple_spinner_item, 0, categories)
+        categoriesSpinner.adapter = categoriesDropDownAdapter
     }
 }
