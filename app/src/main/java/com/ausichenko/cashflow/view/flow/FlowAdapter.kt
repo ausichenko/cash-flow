@@ -15,8 +15,8 @@ import java.util.*
 
 class FlowAdapter : RecyclerView.Adapter<FlowAdapter.ViewHolder>(), StickyRecyclerHeadersAdapter<FlowAdapter.HeaderViewHolder> {
 
-    private val itemViewType = 2
-    private val footerViewType = 3
+    private val itemViewType = 1
+    private val footerViewType = 2
 
     var flows: List<FlowEntity> = ArrayList()
 
