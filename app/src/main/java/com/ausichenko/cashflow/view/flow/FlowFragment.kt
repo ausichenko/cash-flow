@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ausichenko.cashflow.R
 import com.ausichenko.cashflow.view.NavigationFragment
 import com.ausichenko.cashflow.view.flow.add.AddFlowFragment
+import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration
 import kotlinx.android.synthetic.main.fragment_categories.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -37,6 +38,9 @@ class FlowFragment : NavigationFragment() {
 
     private fun initFlowsView(view: View) {
         view.recyclerView.layoutManager = LinearLayoutManager(context)
+
+        val headersDecor = StickyRecyclerHeadersDecoration(flowAdapter)
+        view.recyclerView.addItemDecoration(headersDecor)
         view.recyclerView.addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
         view.recyclerView.adapter = flowAdapter
     }

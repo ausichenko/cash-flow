@@ -72,6 +72,8 @@ dependencies {
     // optional - RxJava support
     //implementation "androidx.paging:paging-rxjava2:$paging_version"
 
+    implementation "com.timehop.stickyheadersrecyclerview:library:0.4.3@aar"
+
     testImplementation 'junit:junit:4.12'
     testImplementation "org.koin:koin-test:0.9.3"
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
