@@ -16,7 +16,7 @@
             android:layout_weight="1"
             android:text="Category"
             android:textColor="@color/primary_text"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <Spinner
             android:id="@+id/categoriesSpinner"
@@ -37,15 +37,14 @@
             android:layout_weight="1"
             android:text="Date"
             android:textColor="@color/primary_text"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/dateButton"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="23.11.23"
-            android:textSize="18sp" />
+            android:text="23.11.23" />
 
     </LinearLayout>
 
@@ -54,16 +53,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Name"
-        android:inputType="textEmailAddress"
-        android:textSize="18sp" />
+        android:inputType="textNoSuggestions" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/descriptionEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Description"
-        android:inputType="textEmailAddress"
-        android:textSize="18sp" />
+        android:inputType="textNoSuggestions" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,7 +73,7 @@
             android:layout_weight="1"
             android:text="Price"
             android:textColor="@color/primary_text"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/priceEditText"
@@ -84,13 +81,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Price"
-            android:inputType="textEmailAddress"
-            android:textSize="18sp" />
+            android:inputType="numberDecimal" />
 
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/save_button"
+        android:id="@+id/saveButton"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
