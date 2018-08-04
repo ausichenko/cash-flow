@@ -23,7 +23,7 @@ class FlowFragment : NavigationFragment() {
 
     private val addFlowFragment = AddFlowFragment()
 
-    val flowViewModel: FlowViewModel by viewModel()
+    val viewModel: FlowViewModel by viewModel()
     private val flowAdapter = FlowAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -42,18 +42,22 @@ class FlowFragment : NavigationFragment() {
     }
 
     private fun initAddFlowDialog() {
-
+        addFlowFragment.saveListener = object : AddFlowFragment.OnSaveFlowListener {
+            override fun onSave() {
+                viewModel.getData()
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        flowViewModel.flow.observe(this, Observer {
+        viewModel.flow.observe(this, Observer {
             flowAdapter.flows = it
             flowAdapter.notifyDataSetChanged()
         })
 
-        flowViewModel.getData()
+        viewModel.getData()
     }
 
     override fun onFabClick() {

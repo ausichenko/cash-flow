@@ -9,7 +9,6 @@ import com.ausichenko.cashflow.data.models.Result
 import com.ausichenko.cashflow.data.repository.CashRepository
 import com.ausichenko.cashflow.utils.AppExecutors
 import kotlinx.coroutines.experimental.launch
-import java.util.*
 
 class FlowViewModel(
         private val appExecutors: AppExecutors,
@@ -31,10 +30,5 @@ class FlowViewModel(
         } else {
             Log.d("FlowViewModel", "error")
         }
-    }
-
-    fun saveFlowTest() = launch(appExecutors.uiContext) {
-        val flowEntity = FlowEntity(null, Date(), null, "test", "test_desc", 1.0)
-        cashRepository.saveFlow(flowEntity)
     }
 }
