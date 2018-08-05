@@ -14,7 +14,13 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
     private val itemViewType = 2
     private val footerViewType = 3
 
-    var categories: List<CategoryEntity> = ArrayList()
+    var categories: MutableList<CategoryEntity> = mutableListOf()
+
+    fun removeItem(position: Int) {
+        categories.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, categories.size)
+    }
 
     override fun getItemViewType(position: Int): Int {
         return if (position == categories.size) footerViewType else itemViewType

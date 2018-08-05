@@ -26,4 +26,8 @@ class CategoryViewModel(
             Log.d("NavViewModel", "error")
         }
     }
+
+    fun deleteCategory(categoryEntity: CategoryEntity) = launch(appExecutors.uiContext) {
+        cashRepository.deleteCategory(categoryEntity)
+    }
 }
