@@ -68,6 +68,10 @@ class AddFlowFragment : BottomSheetDialogFragment() {
             val categoryId = (categoriesSpinner.selectedItem as CategoryEntity).id
             viewModel.saveFlow(categoryId!!, date.time, name, description, price.toDouble())
 
+            view.nameEditText.setText("")
+            view.descriptionEditText.setText("")
+            view.priceEditText.setText("")
+
             saveListener.onSave()
             dismiss()
         }
