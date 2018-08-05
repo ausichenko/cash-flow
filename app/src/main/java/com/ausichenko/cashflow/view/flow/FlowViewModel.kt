@@ -26,4 +26,8 @@ class FlowViewModel(
             Log.d("FlowViewModel", "error")
         }
     }
+
+    fun deleteFlow(flowEntity: FlowEntity) = launch(appExecutors.uiContext) {
+        cashRepository.deleteFlow(flowEntity)
+    }
 }

@@ -18,7 +18,13 @@ class FlowAdapter : RecyclerView.Adapter<FlowAdapter.ViewHolder>(), StickyRecycl
     private val itemViewType = 1
     private val footerViewType = 2
 
-    var flows: List<FlowEntity> = ArrayList()
+    var flows: MutableList<FlowEntity> = mutableListOf()
+
+    fun removeItem(position: Int) {
+        flows.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, flows.size)
+    }
 
     override fun getItemViewType(position: Int): Int {
         return if (position == flows.size) footerViewType else itemViewType
